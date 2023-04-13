@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>fortune</title>
+</head>
+<body>
+	<style>
+		#fortune {
+			background-color: #4CAF50; 
+            border: none; 
+            color: white; 
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none; 
+            display: inline-block;
+            font-size: 16px; 
+            margin: 10px;
+            cursor: pointer;
+		}
+		#fortune:hover {
+			transform: translateY(-5px);
+			box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.3);
+		}
+	</style>
+<div id="fortune">daili fortune</div>
+<div id="ftnshow"></div>
+<script>
+    if(getCookie("ftnmain")!="void"){
+        document.getElementById("fortune").style.display = "none"
+        document.getElementById("ftnshow").innerHTML = getCookie("ftnmain");
+    }
+    function setCookie(cname,cvalue,exdays){
+        //var d = new Date();
+        //d.setTime(d.getTime()+(exdays*24*60*60*1000));
+        var currentDate = new Date();
+        var td = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()+1, 8, 0, 0);
+        var expires = "expires="+td.toGMTString();
+        document.cookie = cname+"="+cvalue+"; "+expires;
+    }
+    function getCookie(cname){
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) { return c.substring(name.length,c.length); }
+        }
+        return "void";
+    }
+    
+    fortune.onclick=function ftn_renderer(){
+        if(getCookie("ftnmain")=="void"){
+            var ftn = Math.floor(Math.random()*6);
+            if(ftn==0){
+                setCookie("ftnmain","terrible",100000);
+            }
+            if(ftn==1){
+                setCookie("ftnmain","bad",100000);
+            }
+            if(ftn==2){
+                setCookie("ftnmain","normal",100000);
+            }
+            if(ftn==3){
+                setCookie("ftnmain","good",100000);
+            }
+            if(ftn==4){
+                setCookie("ftnmain","great",100000);
+            }
+            if(ftn==5){
+                setCookie("ftnmain","fantastic",100000);
+            }
+            document.getElementById("fortune").style.display = "none"
+        }else{
+           // alert("do not get your fortune twice");
+            document.getElementById("fortune").style.display = "none"
+        }
+        var ftnname=getCookie("ftnmain");
+            //alert("fuck "+ftnname);
+        var yy = "You're gonna have a <"+ftnname+"> day";
+        document.getElementById("ftnshow").innerHTML = yy;
+    }
+</script>
+</body>
+</html>
+
+<!-- 
+demo by lhx v1.0.0
+daily fortune
+keep updating on github:https://github.com/unknownturtleshell/daily-fortune/
+-->
